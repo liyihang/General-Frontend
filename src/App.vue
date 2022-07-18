@@ -1,10 +1,6 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <h1>123</h1>
-  <HelloWorld msg="come from App" />
+  <div>{{ isMobileTermial }}</div>
 </template>
+<script setup>
+import { isMobileTermial } from './utils/flexible'
+</script>
