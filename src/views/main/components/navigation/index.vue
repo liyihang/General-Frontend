@@ -1,5 +1,5 @@
 <template>
-  <mobile-navigation v-if="isMobileTermial" />
+  <mobile-navigation v-if="isMobileTermial" :category="category" />
 </template>
 
 <script setup>
@@ -11,8 +11,8 @@ import { ref } from 'vue';
 const category = ref([])
 const getCategoryData = async () => {
   const res = await getCategory()
-  category.value = res
   console.log(res)
+  category.value = res.categorys
 }
 getCategoryData()
 </script>
