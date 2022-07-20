@@ -10,6 +10,9 @@ export default defineConfig({
         target: 'https://api.imooc-front.lgdsunday.club/',
         changeOrigin: true
       }
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
     }
   },
   resolve: {
