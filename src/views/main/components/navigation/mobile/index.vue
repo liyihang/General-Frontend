@@ -14,6 +14,7 @@
               item.name
           }}</li>
     </ul>
+    <m-popup></m-popup>
   </div>
 </template>
 
