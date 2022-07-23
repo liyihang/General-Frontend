@@ -3,11 +3,13 @@
     <teleport to="body">
       <!-- 蒙版 -->
       <transition name="fade">
-        <div class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"></div>
+        <div v-if="modelValue" class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
+             @click="emites('update:modelValue', false)">
+        </div>
       </transition>
       <!-- 内容 -->
       <transition name="pop-down-up">
-        <div v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
+        <div v-if="modelValue" v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
           <slot></slot>
         </div>
       </transition>
@@ -16,7 +18,13 @@
 </template>
 
 <script setup>
-
+const props = defineProps({
+  modelValue: {
+    required: true,
+    Type: Boolean
+  }
+})
+const emits = defineEmits(['update:modelValue'])
 </script>
 
 <style lang="scss" scoped>
