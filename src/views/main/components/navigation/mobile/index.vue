@@ -14,7 +14,15 @@
               item.name
           }}</li>
     </ul>
-    <m-popup v-model="isVisible"></m-popup>
+    <m-popup v-model="isVisible">
+      <div>
+        <ul>
+          <li>12312312</li>
+          <li>12312312</li>
+          <li>12312312</li>
+        </ul>
+      </div>
+    </m-popup>
   </div>
 </template>
 

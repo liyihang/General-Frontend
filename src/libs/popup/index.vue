@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+import { useScrollLock } from '@vueuse/core';
 const props = defineProps({
   modelValue: {
     required: true,
@@ -25,6 +26,8 @@ const props = defineProps({
   }
 })
 const emits = defineEmits(['update:modelValue'])
+// 锁定状态
+const isLocked = useScrollLock(document.body)
 </script>
 
 <style lang="scss" scoped>
