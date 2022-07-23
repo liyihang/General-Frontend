@@ -15,13 +15,7 @@
           }}</li>
     </ul>
     <m-popup v-model="isVisible">
-      <div>
-        <ul>
-          <li>12312312</li>
-          <li>12312312</li>
-          <li>12312312</li>
-        </ul>
-      </div>
+      <Menu :categories="category" @onItemClick="onItemClick"></Menu>
     </m-popup>
   </div>
 </template>
@@ -29,6 +23,7 @@
 <script setup>
 import { onBeforeUpdate, ref, watch } from 'vue';
 import { useScroll } from '@vueuse/core'
+import Menu from '@/views/main/components/menu/index.vue';
 defineProps({
   category: {
     type: Array,
@@ -68,6 +63,7 @@ watch(currentCategoryIndex, (val) => {
 // click
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+  isVisible.value = false
 }
 // popup
 const isVisible = ref(false)
