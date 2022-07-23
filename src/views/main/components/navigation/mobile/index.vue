@@ -5,7 +5,7 @@
       <!-- 滑块 -->
       <li ref="sliderTarget" :style="sliderStyle" class="absolute h-[22px] bg-zinc-900 rounded-lg duration-200"></li>
       <!-- icon -->
-      <li class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white">
+      <li class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white" @click="onShowPop">
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
       </li>
       <li :ref="setItemRef" v-for="(item, index) in category" :key="item.id"
@@ -14,7 +14,7 @@
               item.name
           }}</li>
     </ul>
-    <m-popup></m-popup>
+    <m-popup v-model="isVisible"></m-popup>
   </div>
 </template>
 
@@ -60,5 +60,10 @@ watch(currentCategoryIndex, (val) => {
 // click
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+}
+// popup
+const isVisible = ref(false)
+const onShowPop = () => {
+  isVisible.value = true
 }
 </script>

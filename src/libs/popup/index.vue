@@ -4,7 +4,7 @@
       <!-- 蒙版 -->
       <transition name="fade">
         <div v-if="modelValue" class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
-             @click="emites('update:modelValue', false)">
+             @click="emits('update:modelValue', false)">
         </div>
       </transition>
       <!-- 内容 -->
