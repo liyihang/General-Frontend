@@ -1,5 +1,5 @@
 <template>
-  <div class=" w-full bg-white border-b border-b-zinc-200 px-1 py-2">
+  <div class=" w-full bg-white border-b border-b-zinc-200 px-1 py-1">
     <div class=" flex items-center">
       <img class=" h-4 cursor-pointer mr-2" src="https://www.imooc.com/static/img/index/logo2020.png" alt=""
            @click="onToHome">
