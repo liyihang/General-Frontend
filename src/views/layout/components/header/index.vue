@@ -1,7 +1,8 @@
 <template>
   <div class=" w-full bg-white border-b border-b-zinc-200 px-1 py-1">
     <div class=" flex items-center">
-      <img class=" h-4 cursor-pointer mr-2" src="https://www.imooc.com/static/img/index/logo2020.png" alt=""
+      <img class=" h-4 cursor-pointer mr-2"
+           src="https://www.google.com.hk/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt=""
            @click="onToHome">
       <header-search class=" mr-1"></header-search>
       <header-theme-vue class=" mr-1"></header-theme-vue>
