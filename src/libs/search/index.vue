@@ -12,7 +12,8 @@
                   class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500">
       </m-svg-icon>
       <!-- 分割线 -->
-      <div class=" opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200">
+      <div
+           class=" opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100">
       </div>
       <!-- 按钮 -->
     </div>
