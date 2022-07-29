@@ -1,7 +1,16 @@
 <template>
   <div>
     <button class=" text-sm text-center rounded duration-200 flex justify-center items-center"
-            :class="[typeEnum[type], sizeEnum[sizeKey].button]"></button>
+            :class="[typeEnum[type], sizeEnum[sizeKey].button], { 'active:scale-105': isActiveAnim }">
+      <!-- loading -->
+      <m-svg-icon v-if="loading" name="loading" class=" h-2 w-2 animate-spin mr-1"></m-svg-icon>
+      <!-- icon 按钮 -->
+      <m-svg-icon v-if="icon" :name="icon" class=" m-auto" :class="sizeEnum[sizeKey].icon" :color="iconColor"
+                  :fillClass="iconClass">
+      </m-svg-icon>
+      <!-- 文字按钮 -->
+      <slot v-else />
+    </button>
   </div>
 </template>
 <script>
@@ -30,7 +39,7 @@ const sizeEnum = {
   'icon-small': {
     button: 'w-3 h-3',
     icon: 'w-1.5 h-1.5'
-  },
+  }
 
 }
 </script>
@@ -72,7 +81,7 @@ const props = defineProps({
     default: 'default',
     validator(val) {
       // 1.获取所有可选项
-      const keys = Object.keys(sizeEnum).filter((key) => { !key.includes('icon') })
+      const keys = Object.keys(sizeEnum).filter((key) => !key.includes('icon'))
       const res = keys.includes(val)
       // 2.判断所选风格是否在选项中
       if (!res) {
@@ -87,7 +96,7 @@ const props = defineProps({
     default: true
   },
   // 是否需要loading状态
-  isActiveLoading: {
+  loading: {
     type: Boolean,
     default: false
   }
