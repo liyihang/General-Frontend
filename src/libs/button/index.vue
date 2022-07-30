@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button class=" text-sm text-center rounded duration-200 flex justify-center items-center"
-            :class="[typeEnum[type], sizeEnum[sizeKey].button], { 'active:scale-105': isActiveAnim }">
+    <button class=" text-sm text-center rounded-xl duration-200 flex justify-center items-center"
+            :class="[typeEnum[type], sizeEnum[sizeKey].button], { 'active:scale-105': isActiveAnim }"
+            @click="onBtnClick">
       <!-- loading -->
       <m-svg-icon v-if="loading" name="loading" class=" h-2 w-2 animate-spin mr-1"></m-svg-icon>
       <!-- icon 按钮 -->
@@ -14,6 +15,8 @@
   </div>
 </template>
 <script>
+const EMITS_CLICK = 'click'
+
 // type
 const typeEnum = {
   primary: 'text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800',
@@ -102,10 +105,16 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits([EMITS_CLICK])
 // props size
 const sizeKey = computed(() => {
-  return props.icon ? 'icon' + props.size : props.size
+  return props.icon ? 'icon-' + props.size : props.size
 })
+// btn click
+const onBtnClick = () => {
+  if (props.loading) return
+  emits(EMITS_CLICK)
+}
 </script>
 
 <style lang="scss" scoped>

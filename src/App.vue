@@ -1,5 +1,4 @@
 <template>
-  <m-button>nihao</m-button>
   <router-view />
 </template>
 <script setup>

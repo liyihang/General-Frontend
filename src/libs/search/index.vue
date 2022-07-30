@@ -16,7 +16,10 @@
            class=" opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100">
       </div>
       <!-- 按钮 -->
+      <m-button class="absolute translate-y-[-50%] top-[50%] right-1 rounded-full" icon="search" iconColor="#ffffff">
+      </m-button>
     </div>
+    <!-- 下拉区 -->
     <transition name="slide" mode="">
       <div
            class=" max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded  border border-zinc-200 duration-200 hover:shadow-2xl">
