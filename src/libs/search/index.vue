@@ -1,12 +1,12 @@
 <template>
-  <div class="group relative p-0.5 rounded-xl border-white duration-500 hover:bg-red-100/40">
+  <div ref="ContainerTarget" class="group relative p-0.5 rounded-xl border-white duration-500 hover:bg-red-100/40">
     <div>
       <!-- search icon -->
       <m-svg-icon class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] left-2" name="search" color="#707070">
       </m-svg-icon>
       <!-- 输入框 -->
       <input class="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide text-sm font-semibold border border-zinc-100 duration-500 focus:border-red-300 group-hover:bg-white group-hover:border-zinc-200"
-             placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandle" />
+             placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandle" @focus="onFocusHandle" />
       <!-- 删除图标 -->
       <m-svg-icon v-show="inputValue" name="input-delete"
                   class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500"
@@ -43,7 +43,8 @@ const EMIT_SEARCH = 'search'
  * 5.事件处理
  */
 
-import { useVModel } from '@vueuse/core'
+import { useVModel, onClickOutside } from '@vueuse/core'
+import { ref } from 'vue';
 const props = defineProps({
   modelValue: {
     required: true,
@@ -61,6 +62,16 @@ const onSearchHandle = () => {
   emits(EMIT_SEARCH, inputValue.value)
   console.log(inputValue.value)
 }
+// focus
+const isFocus = ref(false)
+const onFocusHandle = () => {
+  isFocus.value = true
+}
+// 点击区域外消失弹窗
+const ContainerTarget = ref(null)
+onClickOutside(ContainerTarget, () => {
+  isFocus.value = false
+})
 </script>
 
 <style lang="scss" scoped>
