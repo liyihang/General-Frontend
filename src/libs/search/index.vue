@@ -5,32 +5,34 @@
       <m-svg-icon class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] left-2" name="search" color="#707070">
       </m-svg-icon>
       <!-- 输入框 -->
-      <input class=" block w-full h-[44px] pl-4 outline-0 bg-zinc-100  caret-zinc-400 rounded-xl text-zinc-900 tracking-wide text-sm font-semibold border border-zinc-100 duration-500 focus:border-red-300 group-hover:bg-white group-hover:border-zinc-200"
-             placeholder="搜索" type="text" v-model="inputValue">
+      <input class="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide text-sm font-semibold border border-zinc-100 duration-500 focus:border-red-300 group-hover:bg-white group-hover:border-zinc-200"
+             placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandle" />
       <!-- 删除图标 -->
-      <m-svg-icon name="input-delete"
-                  class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500">
+      <m-svg-icon v-show="inputValue" name="input-delete"
+                  class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500"
+                  @click="onCleanClick">
       </m-svg-icon>
       <!-- 分割线 -->
       <div
-           class=" opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100">
+           class="opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100">
       </div>
       <!-- 按钮 -->
-      <m-button class="absolute translate-y-[-50%] top-[50%] right-1 rounded-full" icon="search" iconColor="#ffffff">
+      <m-button class="opacity-0 absolute translate-y-[-50%] top-[50%] right-1 rounded-full group-hover:opacity-100"
+                icon="search" iconColor="#ffffff" @click="onSearchHandle">
       </m-button>
     </div>
     <!-- 下拉区 -->
     <transition name="slide" mode="">
-      <div
-           class=" max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded  border border-zinc-200 duration-200 hover:shadow-2xl">
+      <div v-if="$slots.dropdown" v-show="isFocus"
+           class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-2xl">
         <slot name="dropdown" />
       </div>
     </transition>
   </div>
 </template>
 <script>
-const UPDATE_MODELVALUE = 'update:modelValue'
-
+const EMIT_UPDATE_MODELVALUE = 'update:modelValue'
+const EMIT_SEARCH = 'search'
 </script>
 <script setup>
 /**
@@ -40,15 +42,25 @@ const UPDATE_MODELVALUE = 'update:modelValue'
  * 4.控制下拉区的展示
  * 5.事件处理
  */
+
 import { useVModel } from '@vueuse/core'
 const props = defineProps({
   modelValue: {
     required: true,
-    type: String
-  }
+    type: String,
+  },
 })
-defineEmits([UPDATE_MODELVALUE])
+const emits = defineEmits([EMIT_UPDATE_MODELVALUE, EMIT_SEARCH])
 const inputValue = useVModel(props)
+// 清空input
+const onCleanClick = () => {
+  inputValue.value = ''
+}
+// 搜索
+const onSearchHandle = () => {
+  emits(EMIT_SEARCH, inputValue.value)
+  console.log(inputValue.value)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +72,6 @@ const inputValue = useVModel(props)
 .slide-enter-from,
 .slide-leave-to {
   opacity: 0;
-  transform: translateY(40px)
+  transform: translateY(40px);
 }
 </style>
