@@ -6,7 +6,8 @@
       </m-svg-icon>
       <!-- 输入框 -->
       <input class="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide text-sm font-semibold border border-zinc-100 duration-500 focus:border-red-300 group-hover:bg-white group-hover:border-zinc-200"
-             placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandle" @focus="onFocusHandle" />
+             placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandle" @focus="onFocusHandle"
+             @blur="onBlurHandle" />
       <!-- 删除图标 -->
       <m-svg-icon v-show="inputValue" name="input-delete"
                   class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500"
@@ -33,6 +34,10 @@
 <script>
 const EMIT_UPDATE_MODELVALUE = 'update:modelValue'
 const EMIT_SEARCH = 'search'
+const EMIT_CLEAR = 'clear'
+const EMIT_INPUT = 'input'
+const EMIT_FOCUS = 'focus'
+const EMIT_BLUR = 'blur'
 </script>
 <script setup>
 /**
@@ -44,18 +49,23 @@ const EMIT_SEARCH = 'search'
  */
 
 import { useVModel, onClickOutside } from '@vueuse/core'
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 const props = defineProps({
   modelValue: {
     required: true,
     type: String,
   },
 })
-const emits = defineEmits([EMIT_UPDATE_MODELVALUE, EMIT_SEARCH])
+const emits = defineEmits([EMIT_UPDATE_MODELVALUE, EMIT_SEARCH, EMIT_CLEAR, EMIT_FOCUS, EMIT_BLUR, EMIT_INPUT])
 const inputValue = useVModel(props)
+// 监听输入
+watch(inputValue, (val) => {
+  emits(EMIT_INPUT, val)
+})
 // 清空input
 const onCleanClick = () => {
   inputValue.value = ''
+  emits(EMIT_CLEAR, '')
 }
 // 搜索
 const onSearchHandle = () => {
@@ -66,6 +76,11 @@ const onSearchHandle = () => {
 const isFocus = ref(false)
 const onFocusHandle = () => {
   isFocus.value = true
+  emits(EMIT_FOCUS)
+}
+// blur
+const onBlurHandle = () => {
+  emits(EMIT_BLUR)
 }
 // 点击区域外消失弹窗
 const ContainerTarget = ref(null)
