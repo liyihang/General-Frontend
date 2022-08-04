@@ -8,14 +8,14 @@
       <li class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white" @click="onShowPop">
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
       </li>
-      <li :ref="setItemRef" v-for="(item, index) in category" :key="item.id"
+      <li :ref="setItemRef" v-for="(item, index) in $store.getters.categorys" :key="item.id"
           class="shrink-0 p-1.5 py-0.5 z-10 duration-200 last:mr-4" @click="onItemClick(index)"
           :class="{ 'text-zinc-100': currentCategoryIndex === index }">{{
               item.name
           }}</li>
     </ul>
     <m-popup v-model="isVisible">
-      <Menu :categories="category" @onItemClick="onItemClick"></Menu>
+      <Menu @onItemClick="onItemClick"></Menu>
     </m-popup>
   </div>
 </template>
@@ -24,12 +24,12 @@
 import { onBeforeUpdate, ref, watch } from 'vue';
 import { useScroll } from '@vueuse/core'
 import Menu from '@/views/main/components/menu/index.vue';
-defineProps({
-  category: {
-    type: Array,
-    required: true
-  }
-})
+// defineProps({
+//   category: {
+//     type: Array,
+//     required: true
+//   }
+// })
 // slider
 const sliderStyle = ref({
   transform: 'translateX(0px)',
