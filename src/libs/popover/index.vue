@@ -16,6 +16,8 @@
 
 </template>
 <script>
+// 延迟关闭时间
+const DELAY_TIME = 100
 /**
  * ①气泡位置
  * 左上
@@ -62,12 +64,19 @@ const props = defineProps({
 })
 const isVisible = ref(false)
 // 鼠标移入触发
+let timeout
 const onMouseEnter = () => {
   isVisible.value = true
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 }
 // 鼠标移出触发
 const onMouseLeave = () => {
-  isVisible.value = false
+  timeout = setTimeout(() => {
+    isVisible.value = false
+    timeout = null
+  }, DELAY_TIME)
 
 }
 // ③计算元素尺寸
