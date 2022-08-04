@@ -1,5 +1,5 @@
 <template>
-  <m-popover>
+  <m-popover placement="bottom-left">
     <!--named slot  show popover -->
     <template #reference>
       <m-svg-icon name="theme-light"
