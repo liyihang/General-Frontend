@@ -7,10 +7,20 @@
       <div
         class="absolute right-1 bottom-1 z-20 p-1 rounded cursor-pointer duration-200 hover:bg-zinc-200"
       >
-        <m-svg-icon name="unfold" fillClass="fill-zinc-900"></m-svg-icon>
+        <m-svg-icon
+          name="unfold"
+          class="w-1 h-1"
+          fillClass="fill-zinc-900"
+        ></m-svg-icon>
       </div>
       <!-- item -->
-      <li></li>
+      <li
+        v-for="item in $store.getters.categorys"
+        :key="item.id"
+        class="shrink-0 px-1.5 py-0 z-10 duration-200 text-zinc-900 text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 rounded mr-1 mb-1"
+      >
+        {{ item.name }}
+      </li>
     </ul>
   </div>
 </template>

@@ -1,10 +1,12 @@
 <template>
   <mobile-navigation v-if="isMobileTermial" />
+  <pc-navigation v-else></pc-navigation>
 </template>
 
 <script setup>
 import { isMobileTermial } from '@/utils/flexible'
 import mobileNavigation from './mobile/index.vue'
+import pcNavigation from './pc/index.vue'
 // import { getCategory } from '@/api/category'
 // import { ref } from 'vue'
 // import { ALL_CATEGORY_ITEM } from '@/constants'
@@ -22,5 +24,4 @@ const store = useStore()
 store.dispatch('category/useCategory')
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
