@@ -20,7 +20,7 @@ export default {
     // 获取category数据保存到vuex中
     async useCategory(context) {
       const { categorys } = await getCategory()
-      console.log(categorys);
+      // console.log(categorys);
       context.commit('setCategory', categorys)
     }
   }

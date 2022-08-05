@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white dark:bg-zinc-900 sticky top-0 left-0 w-full z-10">
+  <div
+    class="bg-white dark:bg-zinc-900 sticky top-0 left-0 w-full z-10 duration-500"
+  >
     <ul
       class="w-[800px] relative flex flex-wrap justify-center overflow-x-auto px-[10px] py-1 text-xs text-zinc-600 duration-200 overflow-auto mx-auto"
       :class="[isOpen ? 'h-[256px]' : 'h-[64px]']"
