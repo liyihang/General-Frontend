@@ -1,14 +1,14 @@
 /**
  * 处理navigator中的category数据
  */
-import { ALL_CATEGORY_ITEM } from '@/constants'
+import { ALL_CATEGORY_ITEM, CATEGORY_DATA } from '@/constants'
 import { getCategory } from '@/api/category'
 
 export default {
   namespaced: true,
   state: () => {
     return {
-      category: [ALL_CATEGORY_ITEM]
+      category: [CATEGORY_DATA]
     }
   },
   mutations: {
