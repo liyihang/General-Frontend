@@ -1,13 +1,28 @@
 <template>
   <div>
-    <button class=" text-sm text-center rounded-xl duration-200 flex justify-center items-center"
-            :class="[typeEnum[type], sizeEnum[sizeKey].button], { 'active:scale-105': isActiveAnim }"
-            @click="onBtnClick">
+    <button
+      class="text-sm text-center rounded-xl duration-200 flex justify-center items-center"
+      :class="
+        ([typeEnum[type], sizeEnum[sizeKey].button],
+        { 'active:scale-105': isActiveAnim })
+      "
+      @click="onBtnClick"
+    >
       <!-- loading -->
-      <m-svg-icon v-if="loading" name="loading" class=" h-2 w-2 animate-spin mr-1"></m-svg-icon>
+      <m-svg-icon
+        v-if="loading"
+        name="loading"
+        class="h-2 w-2 animate-spin mr-1"
+      ></m-svg-icon>
       <!-- icon 按钮 -->
-      <m-svg-icon v-if="icon" :name="icon" class=" m-auto" :class="sizeEnum[sizeKey].icon" :color="iconColor"
-                  :fillClass="iconClass">
+      <m-svg-icon
+        v-if="icon"
+        :name="icon"
+        class="m-auto"
+        :class="sizeEnum[sizeKey].icon"
+        :color="iconColor"
+        :fillClass="iconClass"
+      >
       </m-svg-icon>
       <!-- 文字按钮 -->
       <slot v-else />
@@ -19,31 +34,31 @@ const EMITS_CLICK = 'click'
 
 // type
 const typeEnum = {
-  primary: 'text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800',
-  main: 'text-white bg-main hover:bg-hover-main active:bg-main',
-  info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
+  primary:
+    'text-white bg-zinc-800 dark:bg-zinc-900 hover:bg-zinc-900 dark:hover:bg-zinc-700 active:bg-zinc-800 dark:active:bg-zinc-700',
+  main: 'text-white bg-main dark:bg-zinc-900  hover:bg-hover-main  dark:hover:bg-zinc-700 active:bg-main dark:active:bg-zinc-700',
+  info: 'text-zinc-800 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 active:bg-zinc-200 dark:active:bg-zinc-700',
 }
-// size 
+// size
 const sizeEnum = {
   // 文字按钮
   default: {
     button: 'w-8 h-4 text-base',
-    icon: ''
+    icon: '',
   },
   // icon 按钮
   'icon-default': {
     button: 'w-4 h-4',
-    icon: 'w-1.5 h-1.5'
+    icon: 'w-1.5 h-1.5',
   },
   small: {
     button: 'w-7 h-3 text-base',
-    icon: ''
+    icon: '',
   },
   'icon-small': {
     button: 'w-3 h-3',
-    icon: 'w-1.5 h-1.5'
-  }
-
+    icon: 'w-1.5 h-1.5',
+  },
 }
 </script>
 <script setup>
@@ -55,7 +70,7 @@ const sizeEnum = {
  * ⑤处理点击事件
  */
 
-import { computed } from '@vue/reactivity';
+import { computed } from '@vue/reactivity'
 const props = defineProps({
   // icon 图标
   icon: String,
@@ -76,7 +91,7 @@ const props = defineProps({
         throw new Error(`type 类型必须是${key.join(',')}中的一个`)
       }
       return res
-    }
+    },
   },
   // 尺寸大小
   size: {
@@ -91,18 +106,18 @@ const props = defineProps({
         throw new Error(`size 类型必须是${key.join(',')}中的一个`)
       }
       return res
-    }
+    },
   },
   // 点击按钮是是否需要动画
   isActiveAnim: {
     type: Boolean,
-    default: true
+    default: true,
   },
   // 是否需要loading状态
   loading: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const emits = defineEmits([EMITS_CLICK])
@@ -117,5 +132,4 @@ const onBtnClick = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

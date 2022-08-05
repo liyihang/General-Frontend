@@ -1,19 +1,22 @@
 <template>
-  <div class=" relative" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div class="relative" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div ref="referenceTarget">
       <!--named slot  show popover -->
       <slot name="reference"></slot>
     </div>
     <!-- 气泡展示 -->
     <transition name="slide">
-      <div v-show="isVisible" class=" absolute p-1 z-20 bg-white border rounded-md" ref="containerTarget"
-           :style="contentStyle">
+      <div
+        v-show="isVisible"
+        class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border dark:border-zinc-700 rounded-md"
+        ref="containerTarget"
+        :style="contentStyle"
+      >
         <!-- slot show container -->
         <slot />
       </div>
     </transition>
   </div>
-
 </template>
 <script>
 // 延迟关闭时间
@@ -33,7 +36,7 @@ const placementEnum = [
   PROP_TOP_LEFT,
   PROP_TOP_RIGHT,
   PROP_BOTTOM_LEFT,
-  PROP_BOTTOM__RIGHT
+  PROP_BOTTOM__RIGHT,
 ]
 </script>
 <script setup>
@@ -46,7 +49,7 @@ const placementEnum = [
  * ⑤根据props计算样式
  */
 
-import { nextTick, ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue'
 //② props定义
 
 const props = defineProps({
@@ -59,8 +62,8 @@ const props = defineProps({
         throw new Error(`placement 必须是${placementEnum.join(',')}中的一个`)
       }
       return res
-    }
-  }
+    },
+  },
 })
 const isVisible = ref(false)
 // 鼠标移入触发
@@ -77,7 +80,6 @@ const onMouseLeave = () => {
     isVisible.value = false
     timeout = null
   }, DELAY_TIME)
-
 }
 // ③计算元素尺寸
 const referenceTarget = ref(null)
@@ -86,13 +88,13 @@ const getElementSize = (target) => {
   if (!target) return
   return {
     width: target.offsetWidth,
-    height: target.offsetHeight
+    height: target.offsetHeight,
   }
 }
 // ④生成气泡样式对象，计算气泡位置
 const contentStyle = ref({
   top: 0,
-  left: 0
+  left: 0,
 })
 // ⑤气泡展示时进行计算
 watch(isVisible, (val) => {
@@ -100,25 +102,30 @@ watch(isVisible, (val) => {
   nextTick(() => {
     switch (props.placement) {
       case PROP_TOP_RIGHT:
-        contentStyle.value.top = 0,
-          contentStyle.value.left = -getElementSize(containerTarget.value).width + 'px'
-        break;
+        ;(contentStyle.value.top = 0),
+          (contentStyle.value.left =
+            -getElementSize(containerTarget.value).width + 'px')
+        break
       case PROP_TOP_LEFT:
-        contentStyle.value.top = 0,
-          contentStyle.value.left = getElementSize(referenceTarget.value).width + 'px'
-        break;
+        ;(contentStyle.value.top = 0),
+          (contentStyle.value.left =
+            getElementSize(referenceTarget.value).width + 'px')
+        break
       case PROP_BOTTOM_LEFT:
-        contentStyle.value.top = getElementSize(referenceTarget.value).width + 'px',
-          contentStyle.value.left = -getElementSize(containerTarget.value).width + 'px'
-        break;
+        ;(contentStyle.value.top =
+          getElementSize(referenceTarget.value).width + 'px'),
+          (contentStyle.value.left =
+            -getElementSize(containerTarget.value).width + 'px')
+        break
       case PROP_BOTTOM__RIGHT:
-        contentStyle.value.top = getElementSize(referenceTarget.value).height + 'px',
-          contentStyle.value.left = getElementSize(referenceTarget.value).width + 'px'
-        break;
+        ;(contentStyle.value.top =
+          getElementSize(referenceTarget.value).height + 'px'),
+          (contentStyle.value.left =
+            getElementSize(referenceTarget.value).width + 'px')
+        break
     }
   })
 })
-
 </script>
 
 <style lang="scss" scoped>

@@ -3,13 +3,19 @@
     <teleport to="body">
       <!-- 蒙版 -->
       <transition name="fade">
-        <div v-if="isVisible" class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
-             @click="isVisible = false">
-        </div>
+        <div
+          v-if="isVisible"
+          class="w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
+          @click="isVisible = false"
+        ></div>
       </transition>
       <!-- 内容 -->
       <transition name="pop-down-up">
-        <div v-if="isVisible" v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
+        <div
+          v-if="isVisible"
+          v-bind="$attrs"
+          class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0"
+        >
           <slot></slot>
         </div>
       </transition>
@@ -18,13 +24,13 @@
 </template>
 
 <script setup>
-import { useScrollLock, useVModel } from '@vueuse/core';
-import { watch } from 'vue';
+import { useScrollLock, useVModel } from '@vueuse/core'
+import { watch } from 'vue'
 const props = defineProps({
   modelValue: {
     required: true,
-    Type: Boolean
-  }
+    Type: Boolean,
+  },
 })
 defineEmits(['update:modelValue'])
 // useVmodel
@@ -38,8 +44,9 @@ watch(
     isLocked.value = val
   },
   {
-    immediate: true
-  })
+    immediate: true,
+  }
+)
 </script>
 
 <style lang="scss" scoped>
