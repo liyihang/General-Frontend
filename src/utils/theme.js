@@ -6,9 +6,10 @@ import store from '../store'
 let matchMedia;
 const watchSystemThemeChange = () => {
   if (matchMedia) return
-  matchMedia = window.matchMedia('prefers_color_scheme:dark')
+  matchMedia = window.matchMedia('(prefers-color-scheme:dark)')
   // 监听主题变化
   matchMedia.onchange = () => {
+
     changeTheme(THEME_SYSTEM)
   }
 }
@@ -27,6 +28,7 @@ const changeTheme = (theme) => {
     case THEME_SYSTEM:
       watchSystemThemeChange()
       themeClassName = matchMedia.matches ? 'dark' : 'light'
+      console.log(themeClassName);
       break;
   }
   document.querySelector('html').className = themeClassName
