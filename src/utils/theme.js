@@ -6,6 +6,7 @@ import store from '../store'
 let matchMedia;
 const watchSystemThemeChange = () => {
   if (matchMedia) return
+  // fix bug  change prefers-color-scheme:dark to  (prefers-color-scheme:dark)
   matchMedia = window.matchMedia('(prefers-color-scheme:dark)')
   // 监听主题变化
   matchMedia.onchange = () => {
