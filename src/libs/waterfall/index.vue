@@ -3,19 +3,17 @@
     <!-- 数据渲染 -->
     <template v-if="columnWidth && data.length">
       <div v-for="(item, index) in data" :key="nodeKey ? item[nodeKey] : index"
-        class="m-water-full-item absolute duration-200" :style="{
-          width: columnWidth + 'px',
-          left: item._style.left + 'px',
-          top: item._style.top + 'px'
-        }">
+        class="m-waterfall-item absolute duration-200"
+        :style="{ width: columnWidth + 'px', left: item._style?.left + 'px', top: item._style?.top + 'px' }">
         <slot :item="item" :width="columnWidth" :index="index" />
       </div>
     </template>
+    <div v-else>加载中……</div>
   </div>
 </template>
  
  <script setup>
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps({
   // 数据源
@@ -62,9 +60,38 @@ const useColumnHeightObj = () => {
   }
 }
 // 容器实例
-const containertarget = ref(0)
+const containertarget = ref(null)
 // 容器总宽度
 const containerWidth = ref(0)
+// 容器左侧距离
+const containerLeft = ref(0)
+// 计算容器宽度
+const useContainerWidth = () => {
+  const { paddingLeft, paddingRight } = getComputedStyle(containertarget.value, null)
+  // 容器左边距
+  containerLeft.value = parseFloat(paddingLeft)
+  // 容器宽度
+  containerWidth.value = containertarget.value.offsetWidth - parseFloat(paddingLeft) - parseFloat(paddingRight)
+}
+// 列宽
+const columnWidth = ref(0)
+// 列间距总计
+const columnSpacingWidth = computed(() => {
+  return (props.column - 1) * (props.columnSpacing)
+})
+// 列宽总计
+const useColumnWidth = () => {
+  // 计算容器宽度
+  useContainerWidth()
+  // console.log(containerWidth.value);
+  // console.log(columnSpacingWidth.value);
+  // 计算列宽
+  columnWidth.value = (containerWidth.value - columnSpacingWidth.value) / props.column
+}
+onMounted(() => {
+  useColumnWidth()
+})
+
 </script>
  
  <style lang="scss" scoped>
