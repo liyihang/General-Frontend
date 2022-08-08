@@ -23,4 +23,5 @@ const getPexelsData = async () => {
 }
 getPexelsData()
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

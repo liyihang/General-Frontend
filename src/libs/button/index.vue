@@ -1,28 +1,14 @@
 <template>
   <div>
-    <button
-      class="text-sm text-center rounded-xl duration-200 flex justify-center items-center"
-      :class="
-        ([typeEnum[type], sizeEnum[sizeKey].button],
-        { 'active:scale-105': isActiveAnim })
-      "
-      @click="onBtnClick"
-    >
+    <button class="text-sm text-center rounded-xl duration-200 flex justify-center items-center" :class="
+      [typeEnum[type], sizeEnum[sizeKey].button],
+      { 'active:scale-105': isActiveAnim }
+    " @click="onBtnClick">
       <!-- loading -->
-      <m-svg-icon
-        v-if="loading"
-        name="loading"
-        class="h-2 w-2 animate-spin mr-1"
-      ></m-svg-icon>
+      <m-svg-icon v-if="loading" name="loading" class="h-2 w-2 animate-spin mr-1"></m-svg-icon>
       <!-- icon 按钮 -->
-      <m-svg-icon
-        v-if="icon"
-        :name="icon"
-        class="m-auto"
-        :class="sizeEnum[sizeKey].icon"
-        :color="iconColor"
-        :fillClass="iconClass"
-      >
+      <m-svg-icon v-if="icon" :name="icon" class="m-auto" :class="sizeEnum[sizeKey].icon" :color="iconColor"
+        :fillClass="iconClass">
       </m-svg-icon>
       <!-- 文字按钮 -->
       <slot v-else />
@@ -37,7 +23,7 @@ const typeEnum = {
   primary:
     'text-white bg-zinc-800 dark:bg-zinc-900 hover:bg-zinc-900 dark:hover:bg-zinc-700 active:bg-zinc-800 dark:active:bg-zinc-700',
   main: 'text-white bg-main dark:bg-zinc-900  hover:bg-hover-main  dark:hover:bg-zinc-700 active:bg-main dark:active:bg-zinc-700',
-  info: 'text-zinc-800 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 active:bg-zinc-200 dark:active:bg-zinc-700',
+  info: 'text-zinc-800 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-00 active:bg-zinc-200 dark:active:bg-zinc-700',
 }
 // size
 const sizeEnum = {
@@ -132,4 +118,5 @@ const onBtnClick = () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

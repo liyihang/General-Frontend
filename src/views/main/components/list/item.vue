@@ -1,40 +1,23 @@
 <template>
-  <div
-    class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1 h-[280px] w-[230px]"
-  >
-    <div class="relative w-full rounded cursor-zoom-in group">
+  <div class="group bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1 h-[280px] w-[230px]">
+    <div class=" relative w-full rounded cursor-zoom-in ">
       <!-- 图片  -->
       <img class="w-full rounded bg-transparent" :src="data.photo" />
       <!-- 遮罩层 -->
       <div
-        class="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 left-0 rounded duration-300 group-hover:opacity-100 xl:block"
-      >
+        class="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 left-0 rounded duration-300 group-hover:opacity-100 xl:block">
         <!-- 分享 -->
         <m-button class="absolute top-1.5 left-1.5">分享</m-button>
         <!-- 点赞 -->
-        <m-button
-          class="absolute top-1.5 right-1.5"
-          type="info"
-          icon="heart"
-          iconClass="fill-zinc-900 dark:fill-zinc-200"
-        ></m-button>
+        <m-button class="absolute top-1.5 right-1.5" type="info" icon="heart"
+          iconClass="fill-zinc-900 dark:fill-zinc-200"></m-button>
 
         <!-- 下载 -->
-        <m-button
-          class="absolute bootom-1.5 left-1.5 bg-zinc-100/70"
-          type="info"
-          size="small"
-          icon="download"
-          iconClass="fill-zinc-900 dark:fill-zinc-200"
-        ></m-button>
+        <m-button class="absolute bottom-1.5 left-1.5 bg-zinc-100/70 rounded-full" type="info" size="small"
+          icon="download" iconClass="fill-zinc-900 dark:fill-zinc-200"></m-button>
         <!-- 放大 -->
-        <m-button
-          class="absolute bootom-1.5 right-1.5 bg-zinc-100/70"
-          type="info"
-          size="small"
-          icon="full"
-          iconClass="fill-zinc-900 dark:fill-zinc-200"
-        ></m-button>
+        <m-button class="absolute bottom-1.5 right-1.5 bg-zinc-100/70 rounded-full" type="info" size="small" icon="full"
+          iconClass="fill-zinc-900 dark:fill-zinc-200"></m-button>
       </div>
     </div>
     <!-- 标题 -->
@@ -58,4 +41,5 @@ defineProps({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
