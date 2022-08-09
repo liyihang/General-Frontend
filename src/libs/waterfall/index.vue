@@ -48,7 +48,7 @@ const props = defineProps({
 })
 
 // 容器高度
-const containerHeight = ref(0)
+const containerHeight = ref(240)
 // 记录每列高度的容器 key 所在列， val 列高
 const columnHeightObj = ref({})
 // 记录每列高度对象
@@ -90,6 +90,7 @@ const useColumnWidth = () => {
 }
 onMounted(() => {
   useColumnWidth()
+  console.log(containerHeight.value);
 })
 
 </script>
